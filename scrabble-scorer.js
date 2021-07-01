@@ -34,7 +34,7 @@ let simpleScore = function(word){
 let vowelBonusScore = function(word){
   word = word.toLowerCase();
   let points = 0;
-  let vowels = ['A', 'E', 'I', 'O', 'U'];
+  let vowels = ['a', 'e', 'i', 'o', 'u'];
   for(i = 0; i < word.length; i++){
     if(vowels.includes(word[i].toLowerCase())) {
       points+=3; 
@@ -107,7 +107,7 @@ function transform(oldPointStructure) {
 
   for (let letter in oldPointStructure) {
     for (i = 0; i < oldPointStructure[letter].length; i++){
-      newPointStructure[oldPointStructure[letter][i]] = Number(letter);
+      newPointStructure[oldPointStructure[letter][i].toLowerCase()] = Number(letter);
     }
   }
   return newPointStructure;
