@@ -34,7 +34,7 @@ const oldPointStructure = {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-  console.log("Let's play some scrabble!");
+  console.log("Let's play some scrabble!\n");
   word = input.question("Enter a word to score: ");
 
    return word;
@@ -54,7 +54,7 @@ let vowelBonusScore = function(word){
   let points = 0;
   let vowels = ['A', 'E', 'I', 'O', 'U'];
   for(i = 0; i < word.length; i++){
-    if(word.includes(vowels[i])) {
+    if(vowels.includes(word[i].toUpperCase())) {
       points+=3; 
     } else {
       points+=1;
@@ -107,7 +107,7 @@ function scorerPrompt() {
   console.log('0 - Simple: One point per character');
   console.log('1 - Vowel Bonus: Vowels are worth 3 points');
   console.log('2 - Scrabble: Uses Scrabble point system.')
-  info = input.question('Enter 0, 1, or 2 to choose: ');
+  info = input.question('Enter 0, 1, or 2: ');
   
   if(info === '0'){
     simpleScore(word);
