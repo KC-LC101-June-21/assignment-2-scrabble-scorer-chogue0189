@@ -12,7 +12,7 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-function oldScrabbleScorer(word) {
+/*function oldScrabbleScorer(word) {
 	let points = 0;
  
   let wordArray = word.toUpperCase().split("");
@@ -28,7 +28,7 @@ function oldScrabbleScorer(word) {
 	}
   console.log(`Score for '${word}': ${points}`)
   return points;
- }
+}*/
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -64,8 +64,22 @@ let vowelBonusScore = function(word){
   return points;
 }
 
-let scrabbleScore;
+let scrabbleScore = function(word, newPointStructure){
+  let points = 0;
+  let wordArray = word.toUpperCase().split("");
 
+  for (let letter in newPointStructure){
+    for(i = 0; i < wordArray.length; i++){
+      if(letter === wordArray[i]) {
+        points += newPointStructure[letter];
+      }
+    }
+  }
+  console.log(`Score for '${word}': ${points}`);
+  return points;
+};
+
+//Scoring Algorithm objects
 let scoringAlgorithm1 = {
   name: 'Simple Score',
   description: 'Each letter is worth 1 point.',
@@ -81,12 +95,13 @@ let scoringAlgorithm2 = {
 let scoringAlgorithm3 = {
   name: 'Scrabble',
   description: 'The traditional scoring algorithm.',
-  scoringFunction: oldScrabbleScorer
+  scoringFunction: scrabbleScore
 };
 
 
 const scoringAlgorithms = [scoringAlgorithm1, scoringAlgorithm2, scoringAlgorithm3];
 
+//scorerPrompt function
 function scorerPrompt() {
   console.log('Which scoring algorithm would you like to use?\n');
   console.log('0 - Simple: One point per character');
@@ -99,15 +114,24 @@ function scorerPrompt() {
   } else if (info === '1') {
     vowelBonusScore(word);
   } else if (info === '2') {
-    oldScrabbleScorer(word);
+    scrabbleScore(word, newPointStructure);
   }
 
   return info;
 }
+//transform function
+function transform(oldPointStructure) {
+  let newPointStructure = {};
 
-function transform() {};
+  for (let letter in oldPointStructure) {
+    for (i = 0; i < oldPointStructure[letter].length; i++){
+      newPointStructure[oldPointStructure[letter][i]] = Number(letter);
+    }
+  }
+  return newPointStructure;;
+};
 
-let newPointStructure;
+let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
    initialPrompt();
